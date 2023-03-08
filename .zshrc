@@ -117,3 +117,16 @@ autoload -Uz compinit && compinit
 if [ -f $(brew --prefix)/etc/brew-wrap ];then
   source $(brew --prefix)/etc/brew-wrap
 fi
+
+# 日本語ファイル名を表示可能にする
+setopt print_eight_bit
+# コマンドのスペルを訂正する
+setopt correct
+# 直前と同じコマンドの場合はヒストリに追加しない
+setopt hist_ignore_dups
+# 同じコマンドをヒストリに残さない
+setopt hist_ignore_all_dups
+# スペースから始まるコマンド行はヒストリに残さない
+setopt hist_ignore_space
+# ヒストリに保存するときに余分なスペースを削除する
+setopt hist_reduce_blanks
