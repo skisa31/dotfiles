@@ -106,6 +106,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# 環境変数
+export LANG=ja_JP.UTF-8
+
 # asdfを有効化する
 . $HOME/.asdf/asdf.sh
 # append completions to fpath
@@ -118,6 +121,10 @@ if [ -f $(brew --prefix)/etc/brew-wrap ];then
   source $(brew --prefix)/etc/brew-wrap
 fi
 
+# ヒストリの設定
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
 # 日本語ファイル名を表示可能にする
 setopt print_eight_bit
 # コマンドのスペルを訂正する
