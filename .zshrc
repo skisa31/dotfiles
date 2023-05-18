@@ -109,8 +109,7 @@ source $ZSH/oh-my-zsh.sh
 # 環境変数
 export LANG=ja_JP.UTF-8
 
-# asdfを有効化する
-. $HOME/.asdf/asdf.sh
+
 # append completions to fpath
 fpath=(${ASDF_DIR}/completions $fpath)
 # initialise completions with ZSH's compinit
@@ -137,5 +136,25 @@ setopt hist_ignore_all_dups
 setopt hist_ignore_space
 # ヒストリに保存するときに余分なスペースを削除する
 setopt hist_reduce_blanks
-# nyaeをオフ
+
+# peco
+function peco-select-history() {
+local tac
+if which tac > /dev/null; then
+tac="tac"
+else
+tac="tail -r"
+fi
+BUFFER=$(\history -n 1 | \
+eval $tac | \
+peco --query "$LBUFFER")
+CURSOR=$#BUFFER
+zle clear-screen
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+
+# asdfを有効化する
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+# nyaeを無効化
 setopt nocorrect
